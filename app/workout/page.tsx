@@ -79,11 +79,48 @@ export default function WorkoutDetailPage() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
                 {sec.title}
               </h2>
-              <ul className="mt-3 space-y-2 text-sm text-zinc-300">
-                {sec.items.map((line) => (
-                  <li key={line}>• {line}</li>
-                ))}
-              </ul>
+              {sec.moves && sec.moves.length > 0 ? (
+                <div className="mt-4 space-y-4">
+                  {sec.moves.map((m) => (
+                    <article
+                      key={m.id}
+                      className="rounded-2xl border border-zinc-800/80 bg-zinc-950/60 p-4"
+                    >
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <h3 className="text-base font-semibold text-zinc-100">
+                          {m.name}
+                        </h3>
+                        <span className="text-sm font-semibold text-violet-300">
+                          {m.prescription}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs uppercase tracking-wide text-zinc-500">
+                        {m.muscleGroup}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                        {m.instructions}
+                      </p>
+                      {m.youtubeVideoId ? (
+                        <a
+                          href={yt(m.youtubeVideoId)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-flex text-sm font-semibold text-sky-400 hover:text-sky-300"
+                        >
+                          Watch form video →
+                        </a>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+              ) : null}
+              {sec.bullets && sec.bullets.length > 0 ? (
+                <ul className="mt-3 space-y-2 text-sm text-zinc-300">
+                  {sec.bullets.map((line) => (
+                    <li key={line}>• {line}</li>
+                  ))}
+                </ul>
+              ) : null}
             </section>
           ))}
           <section className="rounded-3xl border border-zinc-800 bg-zinc-900/40 p-5">
@@ -182,24 +219,46 @@ export default function WorkoutDetailPage() {
             ))}
           </section>
           {workout.coreFinisher ? (
-            <section className="mt-6 rounded-3xl border border-violet-500/30 bg-violet-950/30 p-5">
-              <h2 className="text-lg font-semibold text-violet-200">
-                After lifts — {workout.coreFinisher.label}
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                {workout.coreFinisher.rationale}
-              </p>
-              <ul className="mt-4 space-y-3">
-                {workout.coreFinisher.exercises.map((c) => (
-                  <li
-                    key={c.id}
-                    className="rounded-2xl bg-zinc-950/60 px-3 py-2 text-sm text-zinc-200"
-                  >
-                    <span className="font-semibold text-zinc-100">{c.name}</span>
-                    <span className="text-zinc-500"> — {c.prescription}</span>
-                  </li>
-                ))}
-              </ul>
+            <section className="mt-6 space-y-4">
+              <div className="rounded-3xl border border-violet-500/30 bg-violet-950/30 p-5">
+                <h2 className="text-lg font-semibold text-violet-200">
+                  After lifts — {workout.coreFinisher.label}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                  {workout.coreFinisher.rationale}
+                </p>
+              </div>
+              {workout.coreFinisher.exercises.map((c) => (
+                <article
+                  key={c.id}
+                  className="rounded-3xl border border-violet-500/20 bg-zinc-950/80 p-5"
+                >
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="text-base font-semibold text-zinc-100">
+                      {c.name}
+                    </h3>
+                    <span className="text-sm font-semibold text-violet-300">
+                      {c.prescription}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-zinc-500">
+                    {c.muscleGroup}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+                    {c.instructions}
+                  </p>
+                  {c.youtubeVideoId ? (
+                    <a
+                      href={yt(c.youtubeVideoId)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-flex text-sm font-semibold text-sky-400 hover:text-sky-300"
+                    >
+                      Watch form video →
+                    </a>
+                  ) : null}
+                </article>
+              ))}
             </section>
           ) : null}
           <section className="mt-6 rounded-3xl border border-zinc-800 bg-zinc-900/40 p-5">

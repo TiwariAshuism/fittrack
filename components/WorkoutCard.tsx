@@ -29,8 +29,11 @@ export function WorkoutCard({ workout }: Props) {
           <span className="font-semibold text-emerald-300">{ar.walkTarget}</span>
         </div>
         <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-          {ar.sections[0]?.items.slice(0, 2).map((line) => (
-            <li key={line}>• {line}</li>
+          {ar.sections[0]?.moves?.slice(0, 3).map((m) => (
+            <li key={m.id}>
+              • {m.name}{" "}
+              <span className="text-zinc-500">({m.prescription})</span>
+            </li>
           ))}
         </ul>
         <p className="mt-5 text-center text-sm font-semibold text-violet-300">
@@ -63,7 +66,6 @@ export function WorkoutCard({ workout }: Props) {
     );
   }
 
-  const preview = workout.exercises.slice(0, 3);
   const core = workout.coreFinisher;
 
   return (
@@ -76,10 +78,10 @@ export function WorkoutCard({ workout }: Props) {
         <p className="text-sm text-zinc-400">{workout.subtitle}</p>
       </div>
       <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-zinc-500">
-        Main lifts
+        Main lifts ({workout.exercises.length})
       </p>
       <ul className="mt-2 space-y-3">
-        {preview.map((e) => (
+        {workout.exercises.map((e) => (
           <li
             key={e.id}
             className="flex items-center justify-between gap-3 rounded-2xl bg-zinc-950/80 px-3 py-2.5"

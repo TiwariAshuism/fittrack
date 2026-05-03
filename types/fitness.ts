@@ -22,12 +22,16 @@ export interface Exercise {
   instructions: string;
 }
 
-/** Bodyweight / finisher line after main lifts (no video required). */
+/** Bodyweight / finisher after main lifts — same detail pattern as gym moves. */
 export interface CoreFinisherExercise {
   id: string;
   name: string;
   /** e.g. "3×45 sec" or "3×10 per side" */
   prescription: string;
+  instructions: string;
+  muscleGroup: MuscleGroup;
+  /** Omit or leave empty to hide the video link. */
+  youtubeVideoId?: string;
 }
 
 export interface CoreFinisherBlock {
@@ -39,7 +43,10 @@ export interface CoreFinisherBlock {
 
 export interface ActiveRecoverySection {
   title: string;
-  items: string[];
+  /** Structured moves (instructions + optional video). */
+  moves?: CoreFinisherExercise[];
+  /** Plain checklist (steps, foam roll, etc.). */
+  bullets?: string[];
 }
 
 export type WorkoutSessionKind = "gymWithCore" | "activeRecovery" | "fullRest";

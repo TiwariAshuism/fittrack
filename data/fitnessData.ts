@@ -1,5 +1,6 @@
 import type {
   CoreFinisherBlock,
+  CoreFinisherExercise,
   DayMealPlan,
   Exercise,
   WorkoutDay,
@@ -30,18 +31,49 @@ function w(
   };
 }
 
+function ce(
+  id: string,
+  name: string,
+  prescription: string,
+  instructions: string,
+  youtubeVideoId?: string,
+): CoreFinisherExercise {
+  return {
+    id,
+    name,
+    prescription,
+    instructions,
+    muscleGroup: "core",
+    ...(youtubeVideoId ? { youtubeVideoId } : {}),
+  };
+}
+
 const coreA_Mon: CoreFinisherBlock = {
   label: "Core A — Anti-extension",
   rationale:
     "Push day loads chest and shoulders. Anti-extension work uses fresh patterns so you can hit planks and dead bugs with full intent.",
   exercises: [
-    { id: "c-pl", name: "Plank", prescription: "3×45 sec" },
-    { id: "c-db", name: "Dead Bug", prescription: "3×10 per side" },
-    {
-      id: "c-aw",
-      name: "Ab Wheel or Hollow Body Hold",
-      prescription: "3×30 sec",
-    },
+    ce(
+      "c-pl",
+      "Plank",
+      "3×45 sec",
+      "Forearms under shoulders, ribs down, squeeze glutes. Breathe behind the brace.",
+      "pSHjTRCQxIw",
+    ),
+    ce(
+      "c-db",
+      "Dead Bug",
+      "3×10 per side",
+      "Low back glued to the floor; reach opposite arm and leg long, pause, return with control.",
+      "g_BYB0Rk4Qk",
+    ),
+    ce(
+      "c-aw",
+      "Ab Wheel or Hollow Body Hold",
+      "3×30 sec",
+      "Ab wheel: short range first, abs not lower back. Hollow: lower ribs down, legs slightly lifted.",
+      "py0gxrzAqok",
+    ),
   ],
 };
 
@@ -50,9 +82,27 @@ const coreB_Tue: CoreFinisherBlock = {
   rationale:
     "Squats already demand midline stability. This block hits obliques and rotation — the love-handle line — while legs are done.",
   exercises: [
-    { id: "c-bc", name: "Bicycle Crunches", prescription: "3×20 slow" },
-    { id: "c-rt", name: "Russian Twists", prescription: "3×15 per side" },
-    { id: "c-sp", name: "Side Plank", prescription: "3×35 sec each side" },
+    ce(
+      "c-bc",
+      "Bicycle Crunches",
+      "3×20 slow",
+      "Slow elbows to knee; avoid yanking the neck — let ribs rotate.",
+      "IwyvozK0oD8",
+    ),
+    ce(
+      "c-rt",
+      "Russian Twists",
+      "3×15 per side",
+      "Feet down or up for difficulty; rotate from mid-back, not just the arms.",
+      "wkD66rBL1VE",
+    ),
+    ce(
+      "c-sp",
+      "Side Plank",
+      "3×35 sec each side",
+      "Elbow under shoulder, hips stacked; lift hips into one straight line.",
+      "wqzrb67Dwf8",
+    ),
   ],
 };
 
@@ -61,17 +111,27 @@ const coreA_Thu: CoreFinisherBlock = {
   rationale:
     "Pull day builds the back; anti-extension core locks in that posture chain with face pulls + bird dogs over weeks.",
   exercises: [
-    {
-      id: "c-pst",
-      name: "Plank with Shoulder Tap",
-      prescription: "3×12 per side",
-    },
-    { id: "c-bd", name: "Bird Dog", prescription: "3×12 per side" },
-    {
-      id: "c-awr",
-      name: "Ab Wheel Rollout (or Plank)",
-      prescription: "3×30 sec",
-    },
+    ce(
+      "c-pst",
+      "Plank with Shoulder Tap",
+      "3×12 per side",
+      "Minimize hip sway; tap opposite shoulder, reset hips level each rep.",
+      "IAH-_A69_Mc",
+    ),
+    ce(
+      "c-bd",
+      "Bird Dog",
+      "3×12 per side",
+      "Neutral spine; extend hip and opposite shoulder, pause 1 sec, no rotation.",
+      "n-2g-8JQwyc",
+    ),
+    ce(
+      "c-awr",
+      "Ab Wheel Rollout (or Plank)",
+      "3×30 sec",
+      "Roll only as far as you can keep ribs down; substitute hard plank if needed.",
+      "py0gxrzAqok",
+    ),
   ],
 };
 
@@ -80,17 +140,27 @@ const coreB_Fri: CoreFinisherBlock = {
   rationale:
     "Hinges like the RDL wake the posterior chain and deep core. This block doubles down on obliques so every core angle gets hit twice this week.",
   exercises: [
-    {
-      id: "c-rt2",
-      name: "Russian Twists",
-      prescription: "3×20 per side (progress weekly)",
-    },
-    {
-      id: "c-sphd",
-      name: "Side Plank with Hip Dip",
-      prescription: "3×12 per side",
-    },
-    { id: "c-bc2", name: "Bicycle Crunches", prescription: "3×25 slow" },
+    ce(
+      "c-rt2",
+      "Russian Twists",
+      "3×20 per side (progress weekly)",
+      "Add a light med ball or plate when 20 reps feels easy.",
+      "wkD66rBL1VE",
+    ),
+    ce(
+      "c-sphd",
+      "Side Plank with Hip Dip",
+      "3×12 per side",
+      "Controlled dip of bottom hip toward floor, then drive back to stack.",
+      "NXlCGA7bsw4",
+    ),
+    ce(
+      "c-bc2",
+      "Bicycle Crunches",
+      "3×25 slow",
+      "Longer set than Tuesday — keep tempo slow and exhale on the twist.",
+      "IwyvozK0oD8",
+    ),
   ],
 };
 
@@ -357,16 +427,40 @@ export const wednesdayActiveRecovery: WorkoutDay = w({
     sections: [
       {
         title: "Morning — Core C (~10 min)",
-        items: [
-          "Reverse Crunches — 3×15",
-          "Leg Raises — 3×12",
-          "Mountain Climbers — 3×20 per side",
-          "Dead Bug — 2×10 per side",
+        moves: [
+          ce(
+            "w-rc",
+            "Reverse Crunches",
+            "3×15",
+            "Curl pelvis up with control; avoid momentum from the legs swinging.",
+            "HYWJ0jVwzHo",
+          ),
+          ce(
+            "w-lr",
+            "Leg Raises",
+            "3×12",
+            "Press low back down; lift legs with abs, stop before back arches off floor.",
+            "JB2oyawG9KI",
+          ),
+          ce(
+            "w-mc",
+            "Mountain Climbers",
+            "3×20 per side",
+            "Hands under shoulders; drive knee toward chest with a stacked trunk.",
+            "nmwgirngXMA",
+          ),
+          ce(
+            "w-db",
+            "Dead Bug",
+            "2×10 per side",
+            "Same pattern as Mon/Tue finishers — low back stays imprinted throughout.",
+            "g_BYB0Rk4Qk",
+          ),
         ],
       },
       {
         title: "Then",
-        items: [
+        bullets: [
           "8,000–10,000 steps walk",
           "10 min hip flexor + chest stretch (desk posture fix)",
           "Foam roll — upper back, glutes, quads",
