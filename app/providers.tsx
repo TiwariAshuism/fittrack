@@ -2,11 +2,13 @@
 
 import { ThemeProvider } from "next-themes";
 
+import { BodyGoalsHydration } from "@/components/BodyGoalsHydration";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <BodyGoalsHydration />
       {children}
       <div className="pointer-events-none fixed bottom-5 right-4 z-50 md:bottom-6">
         <div className="pointer-events-auto rounded-2xl shadow-lg ring-1 ring-border/60">

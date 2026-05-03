@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useShallow } from "zustand/shallow";
 
 import { Stagger, StaggerItem } from "@/components/animate/Stagger";
+import { GoalCard } from "@/components/GoalCard";
 import { MealsSection } from "@/components/MealsSection";
 import { SummaryStrip } from "@/components/SummaryStrip";
 import { WeeklyCoreRoadmap } from "@/components/WeeklyCoreRoadmap";
@@ -111,6 +112,9 @@ export function Dashboard() {
             ⟳ Refresh
           </Button>
         </header>
+      </StaggerItem>
+      <StaggerItem>
+        <GoalCard />
       </StaggerItem>
       <StaggerItem>
         <SummaryStrip workout={today.workout} meal={today.meal} />
