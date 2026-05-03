@@ -5,6 +5,7 @@ import { useShallow } from "zustand/shallow";
 
 import { MealsSection } from "@/components/MealsSection";
 import { SummaryStrip } from "@/components/SummaryStrip";
+import { WeeklyCoreRoadmap } from "@/components/WeeklyCoreRoadmap";
 import { WaterTracker } from "@/components/WaterTracker";
 import { WorkoutSection } from "@/components/WorkoutSection";
 import { formatDateLabel } from "@/lib/todayController";
@@ -89,6 +90,7 @@ export function Dashboard() {
         </button>
       </header>
       <SummaryStrip workout={today.workout} meal={today.meal} />
+      <WeeklyCoreRoadmap />
       <WorkoutSection workout={today.workout} />
       <MealsSection meal={today.meal} />
       <WaterTracker water={water} onAdd={addWater} onReset={resetWater} />

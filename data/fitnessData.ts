@@ -1,4 +1,9 @@
-import type { DayMealPlan, Exercise, WorkoutDay } from "@/types/fitness";
+import type {
+  CoreFinisherBlock,
+  DayMealPlan,
+  Exercise,
+  WorkoutDay,
+} from "@/types/fitness";
 
 const defaultWarmUp = [
   "5 min light cardio (bike or walk)",
@@ -25,6 +30,70 @@ function w(
   };
 }
 
+const coreA_Mon: CoreFinisherBlock = {
+  label: "Core A — Anti-extension",
+  rationale:
+    "Push day loads chest and shoulders. Anti-extension work uses fresh patterns so you can hit planks and dead bugs with full intent.",
+  exercises: [
+    { id: "c-pl", name: "Plank", prescription: "3×45 sec" },
+    { id: "c-db", name: "Dead Bug", prescription: "3×10 per side" },
+    {
+      id: "c-aw",
+      name: "Ab Wheel or Hollow Body Hold",
+      prescription: "3×30 sec",
+    },
+  ],
+};
+
+const coreB_Tue: CoreFinisherBlock = {
+  label: "Core B — Obliques / rotation",
+  rationale:
+    "Squats already demand midline stability. This block hits obliques and rotation — the love-handle line — while legs are done.",
+  exercises: [
+    { id: "c-bc", name: "Bicycle Crunches", prescription: "3×20 slow" },
+    { id: "c-rt", name: "Russian Twists", prescription: "3×15 per side" },
+    { id: "c-sp", name: "Side Plank", prescription: "3×35 sec each side" },
+  ],
+};
+
+const coreA_Thu: CoreFinisherBlock = {
+  label: "Core A — Anti-extension (pull pairing)",
+  rationale:
+    "Pull day builds the back; anti-extension core locks in that posture chain with face pulls + bird dogs over weeks.",
+  exercises: [
+    {
+      id: "c-pst",
+      name: "Plank with Shoulder Tap",
+      prescription: "3×12 per side",
+    },
+    { id: "c-bd", name: "Bird Dog", prescription: "3×12 per side" },
+    {
+      id: "c-awr",
+      name: "Ab Wheel Rollout (or Plank)",
+      prescription: "3×30 sec",
+    },
+  ],
+};
+
+const coreB_Fri: CoreFinisherBlock = {
+  label: "Core B — Obliques (hinge pairing)",
+  rationale:
+    "Hinges like the RDL wake the posterior chain and deep core. This block doubles down on obliques so every core angle gets hit twice this week.",
+  exercises: [
+    {
+      id: "c-rt2",
+      name: "Russian Twists",
+      prescription: "3×20 per side (progress weekly)",
+    },
+    {
+      id: "c-sphd",
+      name: "Side Plank with Hip Dip",
+      prescription: "3×12 per side",
+    },
+    { id: "c-bc2", name: "Bicycle Crunches", prescription: "3×25 slow" },
+  ],
+};
+
 const ex = (
   id: string,
   name: string,
@@ -47,9 +116,11 @@ const ex = (
 
 export const upperPushDay: WorkoutDay = w({
   key: "upperPushDay",
-  title: "Upper — Push",
-  subtitle: "Chest, shoulders, triceps",
+  title: "Upper Push + Core A",
+  subtitle: "Chest · Shoulders · Triceps · Anti-extension core",
   isRestDay: false,
+  sessionKind: "gymWithCore",
+  coreFinisher: coreA_Mon,
   exercises: [
     ex(
       "bp-1",
@@ -116,9 +187,11 @@ export const upperPushDay: WorkoutDay = w({
 
 export const lowerQuadDay: WorkoutDay = w({
   key: "lowerQuadDay",
-  title: "Lower — Quad Focus",
-  subtitle: "Squat pattern + knee-dominant work",
+  title: "Lower Quad + Core B",
+  subtitle: "Squats · Leg press · Lunges · Oblique core (finishers)",
   isRestDay: false,
+  sessionKind: "gymWithCore",
+  coreFinisher: coreB_Tue,
   exercises: [
     ex(
       "sq-1",
@@ -150,34 +223,16 @@ export const lowerQuadDay: WorkoutDay = w({
       "legs",
       "Torso tall, slight forward tibia angle on front leg.",
     ),
-    ex(
-      "le-1",
-      "Leg Extension",
-      3,
-      "12–15",
-      "60s",
-      "YyvSfVjQeL0",
-      "legs",
-      "Squeeze quads at top without snapping knees.",
-    ),
-    ex(
-      "pl-1",
-      "Plank",
-      3,
-      "45–60s",
-      "60s",
-      "pSHjTRCQxIw",
-      "core",
-      "Ribs down, glutes on, breathe behind brace.",
-    ),
   ],
 });
 
 export const upperPullDay: WorkoutDay = w({
   key: "upperPullDay",
-  title: "Upper — Pull",
-  subtitle: "Back, biceps, rear delts",
+  title: "Upper Pull + Core A",
+  subtitle: "Back · Biceps · Rear delts · Anti-extension core",
   isRestDay: false,
+  sessionKind: "gymWithCore",
+  coreFinisher: coreA_Thu,
   exercises: [
     ex(
       "dl-1",
@@ -244,9 +299,11 @@ export const upperPullDay: WorkoutDay = w({
 
 export const lowerHamstringDay: WorkoutDay = w({
   key: "lowerHamstringDay",
-  title: "Lower — Hamstring & Glute",
-  subtitle: "Hinge + posterior chain",
+  title: "Lower Hamstring + Core B",
+  subtitle: "RDL · Hip thrust · Leg curl · Oblique core (finishers)",
   isRestDay: false,
+  sessionKind: "gymWithCore",
+  coreFinisher: coreB_Fri,
   exercises: [
     ex(
       "rdl-1",
@@ -278,47 +335,83 @@ export const lowerHamstringDay: WorkoutDay = w({
       "legs",
       "Chin tucked, ribs down, squeeze glutes hard at top.",
     ),
-    ex(
-      "bg2-1",
-      "Bulgarian Split Squat",
-      3,
-      "10 each",
-      "90s",
-      "2C-uNgKwPLE",
-      "legs",
-      "Torso slight forward lean for glute bias.",
-    ),
-    ex(
-      "cr-1",
-      "Cable Crunch",
-      3,
-      "12–15",
-      "60s",
-      "AV5WpFSpBQk",
-      "core",
-      "Spine flexes; hips stay still.",
-    ),
   ],
 });
 
-export const restDay: WorkoutDay = w({
-  key: "restDay",
-  title: "Recovery Day",
-  subtitle: "Mobility, steps, sleep",
+export const wednesdayActiveRecovery: WorkoutDay = w({
+  key: "wednesdayActiveRecovery",
+  title: "Recovery + Core C + Walk",
+  subtitle: "Active recovery · Lower abs · Steps",
+  isRestDay: false,
+  sessionKind: "activeRecovery",
+  warmUp: ["Easy 5 min walk", "Ankle + hip circles"],
+  coolDown: [
+    "10 min hip flexor + chest stretch (desk posture)",
+    "Hydrate + hit protein target",
+  ],
+  exercises: [],
+  activeRecovery: {
+    rationale:
+      "Your weekday off from the gym. Core C targets lower abs (hardest to hit). The walk adds ~300–400 kcal toward trunk-fat goals while joints recover.",
+    walkTarget: "8,000–10,000 steps",
+    sections: [
+      {
+        title: "Morning — Core C (~10 min)",
+        items: [
+          "Reverse Crunches — 3×15",
+          "Leg Raises — 3×12",
+          "Mountain Climbers — 3×20 per side",
+          "Dead Bug — 2×10 per side",
+        ],
+      },
+      {
+        title: "Then",
+        items: [
+          "8,000–10,000 steps walk",
+          "10 min hip flexor + chest stretch (desk posture fix)",
+          "Foam roll — upper back, glutes, quads",
+        ],
+      },
+    ],
+  },
+});
+
+export const saturdayRest: WorkoutDay = w({
+  key: "saturdayRest",
+  title: "Full Rest or Light Walk",
+  subtitle: "Optional 20–30 min walk · Foam roll only · Sleep 7–8 hrs",
   isRestDay: true,
-  warmUp: ["Light walk 10–20 min", "Easy joint circles"],
-  coolDown: ["Stretch hips and T-spine", "Hydrate + protein"],
+  sessionKind: "fullRest",
+  warmUp: ["Optional 20–30 min easy walk"],
+  coolDown: [
+    "Foam rolling only",
+    "Sleep 7–8 hrs — this is when abs actually consolidate",
+  ],
+  exercises: [],
+});
+
+export const sundayRest: WorkoutDay = w({
+  key: "sundayRest",
+  title: "Full Rest",
+  subtitle: "Complete recovery · Meal prep · 8 hr sleep target",
+  isRestDay: true,
+  sessionKind: "fullRest",
+  warmUp: ["Light stroll if you want fresh air"],
+  coolDown: [
+    "Prep meals for the week",
+    "No core work — let the week’s stimulus consolidate",
+  ],
   exercises: [],
 });
 
 export const WORKOUT_BY_WEEKDAY: Record<number, WorkoutDay> = {
   1: upperPushDay,
   2: lowerQuadDay,
-  3: restDay,
+  3: wednesdayActiveRecovery,
   4: upperPullDay,
   5: lowerHamstringDay,
-  6: restDay,
-  7: restDay,
+  6: saturdayRest,
+  7: sundayRest,
 };
 
 const sumMeals = (meals: DayMealPlan["meals"]) => {

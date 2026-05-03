@@ -22,14 +22,46 @@ export interface Exercise {
   instructions: string;
 }
 
+/** Bodyweight / finisher line after main lifts (no video required). */
+export interface CoreFinisherExercise {
+  id: string;
+  name: string;
+  /** e.g. "3×45 sec" or "3×10 per side" */
+  prescription: string;
+}
+
+export interface CoreFinisherBlock {
+  label: string;
+  /** Why this core pairs with today’s lift. */
+  rationale: string;
+  exercises: CoreFinisherExercise[];
+}
+
+export interface ActiveRecoverySection {
+  title: string;
+  items: string[];
+}
+
+export type WorkoutSessionKind = "gymWithCore" | "activeRecovery" | "fullRest";
+
 export interface WorkoutDay {
   key: string;
   title: string;
   subtitle: string;
   isRestDay: boolean;
+  /** Drives summary strip + cards (fullRest = Sat/Sun style). */
+  sessionKind: WorkoutSessionKind;
   exercises: Exercise[];
   warmUp: string[];
   coolDown: string[];
+  /** After main gym work (Mon, Tue, Thu, Fri). */
+  coreFinisher?: CoreFinisherBlock;
+  /** Wednesday: core C + walk + mobility. */
+  activeRecovery?: {
+    rationale: string;
+    walkTarget: string;
+    sections: ActiveRecoverySection[];
+  };
 }
 
 export interface MealItem {

@@ -61,14 +61,62 @@ export default function WorkoutDetailPage() {
       <h1 className="mt-2 text-3xl font-bold text-zinc-50">{workout.title}</h1>
       <p className="mt-2 text-zinc-400">{workout.subtitle}</p>
 
-      {workout.isRestDay ? (
+      {workout.sessionKind === "activeRecovery" && workout.activeRecovery ? (
+        <div className="mt-8 space-y-6">
+          <div className="rounded-3xl border border-violet-500/25 bg-violet-950/25 p-6">
+            <p className="text-sm leading-relaxed text-zinc-300">
+              {workout.activeRecovery.rationale}
+            </p>
+            <p className="mt-4 text-sm font-semibold text-emerald-300">
+              Walk: {workout.activeRecovery.walkTarget}
+            </p>
+          </div>
+          {workout.activeRecovery.sections.map((sec) => (
+            <section
+              key={sec.title}
+              className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-5"
+            >
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                {sec.title}
+              </h2>
+              <ul className="mt-3 space-y-2 text-sm text-zinc-300">
+                {sec.items.map((line) => (
+                  <li key={line}>• {line}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+          <section className="rounded-3xl border border-zinc-800 bg-zinc-900/40 p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+              Prep
+            </h2>
+            <ul className="mt-2 space-y-1.5 text-sm text-zinc-300">
+              {workout.warmUp.map((l) => (
+                <li key={l}>• {l}</li>
+              ))}
+            </ul>
+          </section>
+          <section className="rounded-3xl border border-zinc-800 bg-zinc-900/40 p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+              Afterward
+            </h2>
+            <ul className="mt-2 space-y-1.5 text-sm text-zinc-300">
+              {workout.coolDown.map((l) => (
+                <li key={l}>• {l}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      ) : workout.sessionKind === "fullRest" ? (
         <div className="mt-8 rounded-3xl border border-zinc-800 bg-zinc-900/60 p-6">
-          <p className="text-zinc-300">
-            Full recovery: keep steps light, prioritize sleep and protein.
+          <p className="text-sm leading-relaxed text-zinc-300">
+            {workout.key === "sundayRest"
+              ? "No core work — let the week consolidate. Use the day for sleep and meal prep."
+              : "No core work today. Optional easy walk and foam rolling only; prioritize 7–8 hours sleep."}
           </p>
           <div className="mt-6">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
-              Warm-up ideas
+              Ideas
             </h2>
             <ul className="mt-2 space-y-2 text-sm text-zinc-300">
               {workout.warmUp.map((l) => (
@@ -78,7 +126,7 @@ export default function WorkoutDetailPage() {
           </div>
           <div className="mt-6">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
-              Cool-down
+              Recovery focus
             </h2>
             <ul className="mt-2 space-y-2 text-sm text-zinc-300">
               {workout.coolDown.map((l) => (
@@ -101,7 +149,7 @@ export default function WorkoutDetailPage() {
           </section>
           <section className="mt-6 space-y-4">
             <h2 className="text-lg font-semibold text-zinc-100">
-              Exercises ({workout.exercises.length})
+              Main lifts ({workout.exercises.length})
             </h2>
             {workout.exercises.map((e, i) => (
               <article
@@ -133,6 +181,27 @@ export default function WorkoutDetailPage() {
               </article>
             ))}
           </section>
+          {workout.coreFinisher ? (
+            <section className="mt-6 rounded-3xl border border-violet-500/30 bg-violet-950/30 p-5">
+              <h2 className="text-lg font-semibold text-violet-200">
+                After lifts — {workout.coreFinisher.label}
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                {workout.coreFinisher.rationale}
+              </p>
+              <ul className="mt-4 space-y-3">
+                {workout.coreFinisher.exercises.map((c) => (
+                  <li
+                    key={c.id}
+                    className="rounded-2xl bg-zinc-950/60 px-3 py-2 text-sm text-zinc-200"
+                  >
+                    <span className="font-semibold text-zinc-100">{c.name}</span>
+                    <span className="text-zinc-500"> — {c.prescription}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
           <section className="mt-6 rounded-3xl border border-zinc-800 bg-zinc-900/40 p-5">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
               Cool-down
