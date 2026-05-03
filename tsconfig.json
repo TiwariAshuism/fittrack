@@ -24,11 +24,28 @@
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "next.config.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "data/**/*.ts",
+    "lib/**/*.ts",
+    "stores/**/*.ts",
+    "types/**/*.ts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "admin",
+    "web",
+    "services",
+    "api-gateway",
+    "shared",
+    "tests",
+    "scripts",
+    "observability",
+    "product_scope"
+  ]
 }
