@@ -19,15 +19,15 @@ export function WaterTracker({ water, onAdd, onReset }: Props) {
   const offset = circumference - (pct / 100) * circumference;
 
   return (
-    <section className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6">
+    <section className="rounded-3xl border border-zinc-200 bg-white/90 p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/50 dark:shadow-none">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-lg font-semibold text-zinc-100">
+        <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
           💧 Hydration
         </h2>
         <button
           type="button"
           onClick={onReset}
-          className="rounded-full border border-zinc-700 px-3 py-1 text-xs font-semibold text-zinc-400 transition hover:border-rose-500/50 hover:text-rose-300"
+          className="rounded-full border border-zinc-300 px-3 py-1 text-xs font-semibold text-zinc-600 transition hover:border-rose-400 hover:text-rose-700 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-rose-500/50 dark:hover:text-rose-300"
         >
           Reset
         </button>
@@ -40,7 +40,7 @@ export function WaterTracker({ water, onAdd, onReset }: Props) {
               cy="60"
               r="52"
               fill="none"
-              stroke="rgb(39 39 42)"
+              className="stroke-zinc-200 dark:stroke-zinc-800"
               strokeWidth="10"
             />
             <circle
@@ -57,30 +57,33 @@ export function WaterTracker({ water, onAdd, onReset }: Props) {
             />
             <defs>
               <linearGradient id="waterGrad" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stopColor="#22d3ee" />
-                <stop offset="100%" stopColor="#34d399" />
+                <stop offset="0%" stopColor="#0891b2" />
+                <stop offset="100%" stopColor="#059669" />
               </linearGradient>
             </defs>
           </svg>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl font-bold text-zinc-50">
+            <span className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
               {currentL.toFixed(2)}L
             </span>
             <span className="text-xs text-zinc-500">/ {targetL.toFixed(1)}L</span>
           </div>
         </div>
         <div className="w-full max-w-sm flex-1 space-y-3 text-center sm:text-left">
-          <p className="text-sm text-zinc-300">
+          <p className="text-sm text-zinc-700 dark:text-zinc-300">
             Goal: hit{" "}
-            <span className="font-semibold text-cyan-300">
+            <span className="font-semibold text-cyan-700 dark:text-cyan-300">
               {targetL.toFixed(1)}L
             </span>{" "}
             today. You can log up to{" "}
-            <span className="font-semibold text-zinc-200">+500ml</span> over goal.
+            <span className="font-semibold text-zinc-900 dark:text-zinc-200">
+              +500ml
+            </span>{" "}
+            over goal.
           </p>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">
             Remaining to goal:{" "}
-            <span className="font-semibold text-emerald-300">
+            <span className="font-semibold text-emerald-700 dark:text-emerald-300">
               {remainingL.toFixed(2)}L
             </span>
           </p>
@@ -89,7 +92,7 @@ export function WaterTracker({ water, onAdd, onReset }: Props) {
               <span>Progress</span>
               <span>{pct.toFixed(0)}%</span>
             </div>
-            <div className="mt-1 h-2 overflow-hidden rounded-full bg-zinc-800">
+            <div className="mt-1 h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-[width] duration-500 ease-out"
                 style={{ width: `${pct}%` }}
@@ -104,7 +107,7 @@ export function WaterTracker({ water, onAdd, onReset }: Props) {
             key={ml}
             type="button"
             onClick={() => onAdd(ml)}
-            className="rounded-2xl bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-zinc-100 transition hover:bg-zinc-700 active:scale-[0.98]"
+            className="rounded-2xl border border-zinc-200 bg-zinc-100 px-4 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200 active:scale-[0.98] dark:border-0 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
           >
             +{ml}ml
           </button>

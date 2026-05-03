@@ -17,7 +17,7 @@ function sectionHeading(workout: WorkoutDay): string {
 export function WorkoutSection({ workout }: Props) {
   return (
     <section>
-      <h2 className="mb-3 text-lg font-semibold text-zinc-100">
+      <h2 className="mb-3 text-lg font-semibold text-zinc-900 dark:text-zinc-100">
         {sectionHeading(workout)}
       </h2>
       <WorkoutCard workout={workout} />
