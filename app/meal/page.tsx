@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import { motion } from "motion/react";
 import { useShallow } from "zustand/shallow";
 
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { formatDateLabel } from "@/lib/todayController";
 import { useFittrackStore } from "@/stores/fittrackStore";
 
@@ -24,8 +27,12 @@ export default function MealDetailPage() {
 
   if (planStatus === "loading" || !today) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-3 px-4 text-zinc-500 dark:text-zinc-400">
-        <div className="h-10 w-10 animate-spin rounded-full border-2 border-zinc-300 border-t-sky-600 dark:border-zinc-600 dark:border-t-sky-400" />
+      <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-4 bg-background px-4 text-muted-foreground">
+        <div className="flex flex-col items-center gap-3">
+          <Skeleton className="size-12 rounded-full" />
+          <Skeleton className="h-4 w-40" />
+          <Skeleton className="h-3 w-24" />
+        </div>
         <p className="text-sm">Loading meals…</p>
       </div>
     );
@@ -33,15 +40,11 @@ export default function MealDetailPage() {
 
   if (planStatus === "error") {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-16 text-center text-rose-700 dark:text-rose-200">
-        Something went wrong.
-        <button
-          type="button"
-          onClick={loadAll}
-          className="mt-4 block w-full rounded-2xl border border-zinc-200 bg-zinc-900 py-3 font-semibold text-white dark:border-0 dark:bg-zinc-100 dark:text-zinc-900"
-        >
+      <div className="mx-auto max-w-2xl bg-background px-4 py-16 text-center text-destructive">
+        <p className="font-medium">Something went wrong.</p>
+        <Button type="button" onClick={loadAll} className="mt-4 w-full rounded-2xl py-6">
           Retry
-        </button>
+        </Button>
       </div>
     );
   }
@@ -49,7 +52,12 @@ export default function MealDetailPage() {
   const { meal } = today;
 
   return (
-    <div className="mx-auto min-h-screen max-w-2xl px-4 pb-24 pt-8 text-zinc-900 dark:text-zinc-50">
+    <motion.div
+      className="mx-auto min-h-screen max-w-2xl bg-background px-4 pb-24 pt-8 text-foreground"
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+    >
       <Link
         href="/"
         className="text-sm font-semibold text-sky-600 hover:text-sky-800 dark:text-sky-400 dark:hover:text-sky-300"
@@ -127,7 +135,7 @@ export default function MealDetailPage() {
           </article>
         ))}
       </section>
-    </div>
+    </motion.div>
   );
 }
 

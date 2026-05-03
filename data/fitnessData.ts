@@ -18,6 +18,12 @@ const defaultCoolDown = [
   "Deep breathing",
 ];
 
+/** Appended on Mon / Tue / Thu / Fri gym days — lean-phase finisher. */
+const inclineWalkFinisher =
+  "Finish: 20 min incline treadmill walk — incline 8–10, speed 5–6 km/h (walk, not jog; ~150–200 kcal, minimal muscle stress).";
+
+const gymCoolDown = [...defaultCoolDown, inclineWalkFinisher];
+
 function w(
   partial: Omit<WorkoutDay, "warmUp" | "coolDown"> & {
     warmUp?: string[];
@@ -187,13 +193,15 @@ const ex = (
 export const upperPushDay: WorkoutDay = w({
   key: "upperPushDay",
   title: "Upper Push + Core A",
-  subtitle: "Chest · Shoulders · Triceps · Anti-extension core",
+  subtitle:
+    "Lean phase · 8–12 rep compounds · Core A — ~75 min incl. 20 min incline finisher",
   isRestDay: false,
   sessionKind: "gymWithCore",
+  coolDown: gymCoolDown,
   coreFinisher: coreA_Mon,
   exercises: [
-    ex("bp-1", "Barbell Bench Press", 4, "6–8", "2–3 min", "vcBig73ojpE", "chest", "Retract scapula, touch chest, drive up in a slight arc."),
-    ex("ohp-1", "Standing Overhead Press", 3, "8–10", "2 min", "_RlRDWO2jfg", "shoulders", "Brace core, press straight up; clear chin then head through."),
+    ex("bp-1", "Barbell Bench Press", 4, "8–10", "90–120s", "vcBig73ojpE", "chest", "Retract scapula, touch chest, drive up in a slight arc."),
+    ex("ohp-1", "Standing Overhead Press", 3, "8–10", "90–120s", "_RlRDWO2jfg", "shoulders", "Brace core, press straight up; clear chin then head through."),
     ex("id-1", "Incline Dumbbell Press", 3, "10–12", "90s", "8iPEnn-ltC8", "chest", "30–45° bench, control the stretch, no bouncing."),
     ex("lr-1", "Lateral Raises", 3, "12–15", "60s", "3VcKaWpzqHg", "shoulders", "Slight bend in elbows, lead with elbows not hands."),
     ex("pd-1", "Triceps Pushdown (Rope)", 3, "12–15", "60s", "2-LAMcpzODo", "arms", "Split rope at bottom, elbows pinned to sides."),
@@ -204,13 +212,15 @@ export const upperPushDay: WorkoutDay = w({
 export const lowerQuadDay: WorkoutDay = w({
   key: "lowerQuadDay",
   title: "Lower Quad + Core B",
-  subtitle: "Squats · Leg press · Lunges · Oblique core (finishers)",
+  subtitle:
+    "Lean phase · Squat 10–12 reps · Core B — ~75 min incl. 20 min incline finisher",
   isRestDay: false,
   sessionKind: "gymWithCore",
+  coolDown: gymCoolDown,
   coreFinisher: coreB_Tue,
   exercises: [
-    ex("sq-1", "Back Squat", 4, "6–8", "3 min", "ultWZbUMPL8", "legs", "Depth you own, knees track toes, brace hard each rep."),
-    ex("lp-1", "Leg Press", 3, "10–12", "2 min", "IZxyjW7MPJQ", "legs", "Full ROM without rounding low back off pad."),
+    ex("sq-1", "Back Squat", 4, "10–12", "90–120s", "ultWZbUMPL8", "legs", "Depth you own, knees track toes, brace hard each rep."),
+    ex("lp-1", "Leg Press", 3, "10–12", "90–120s", "IZxyjW7MPJQ", "legs", "Full ROM without rounding low back off pad."),
     ex("lk-1", "Walking Lunges", 3, "12 each", "90s", "wrwwXE_x-pQ", "legs", "Torso tall, slight forward tibia angle on front leg."),
   ],
 });
@@ -218,13 +228,15 @@ export const lowerQuadDay: WorkoutDay = w({
 export const upperPullDay: WorkoutDay = w({
   key: "upperPullDay",
   title: "Upper Pull + Core A",
-  subtitle: "Back · Biceps · Rear delts · Anti-extension core",
+  subtitle:
+    "Lean phase · DL 6–8 · Pulldown 10–12 · Core A — ~75 min incl. incline finisher",
   isRestDay: false,
   sessionKind: "gymWithCore",
+  coolDown: gymCoolDown,
   coreFinisher: coreA_Thu,
   exercises: [
-    ex("dl-1", "Conventional Deadlift", 3, "5–6", "3 min", "op9kVnSfh6k", "back", "Hinge pattern, lats on, bar close; reset each rep if needed."),
-    ex("pr-1", "Weighted Pull-Up / Lat Pulldown", 4, "6–10", "2 min", "eGo4IYlbE5g", "back", "Full stretch at top, drive elbows to pockets."),
+    ex("dl-1", "Conventional Deadlift", 3, "6–8", "90–120s", "op9kVnSfh6k", "back", "Hinge pattern, lats on, bar close; reset each rep if needed."),
+    ex("pr-1", "Weighted Pull-Up / Lat Pulldown", 4, "10–12", "90–120s", "eGo4IYlbE5g", "back", "Full stretch at top, drive elbows to pockets."),
     ex("br-1", "Chest-Supported Row", 3, "10–12", "90s", "roCP6wC-6pg", "back", "Pause briefly at peak contraction."),
     ex("fc-1", "Face Pull", 3, "15–20", "60s", "V3NAfMBTmvI", "shoulders", "Pull to face height, external rotate at end."),
     ex("cu-1", "Incline Dumbbell Curl", 3, "10–12", "60s", "soxrZlIl35U", "arms", "Keep elbows slightly forward of torso."),
@@ -235,14 +247,16 @@ export const upperPullDay: WorkoutDay = w({
 export const lowerHamstringDay: WorkoutDay = w({
   key: "lowerHamstringDay",
   title: "Lower Hamstring + Core B",
-  subtitle: "RDL · Hip thrust · Leg curl · Oblique core (finishers)",
+  subtitle:
+    "Lean phase · RDL 8–10s · Core B — ~75 min incl. 20 min incline finisher",
   isRestDay: false,
   sessionKind: "gymWithCore",
+  coolDown: gymCoolDown,
   coreFinisher: coreB_Fri,
   exercises: [
-    ex("rdl-1", "Romanian Deadlift", 4, "8–10", "2–3 min", "JCXUYuzwNrY", "legs", "Soft knees, push hips back, bar skims legs."),
+    ex("rdl-1", "Romanian Deadlift", 4, "8–10", "90–120s", "JCXUYuzwNrY", "legs", "Soft knees, push hips back, bar skims legs."),
     ex("lph-1", "Lying Leg Curl", 3, "10–12", "90s", "1Tq3QdYUuHs", "legs", "Control negative; hips pinned to pad."),
-    ex("bg-1", "Barbell Hip Thrust", 3, "8–12", "2 min", "xDmFkJxP8M0", "legs", "Chin tucked, ribs down, squeeze glutes hard at top."),
+    ex("bg-1", "Barbell Hip Thrust", 3, "8–12", "90–120s", "xDmFkJxP8M0", "legs", "Chin tucked, ribs down, squeeze glutes hard at top."),
   ],
 });
 
@@ -260,7 +274,7 @@ export const wednesdayActiveRecovery: WorkoutDay = w({
   exercises: [],
   activeRecovery: {
     rationale:
-      "Your weekday off from the gym. Core C targets lower abs (hardest to hit). The walk adds ~300–400 kcal toward trunk-fat goals while joints recover.",
+      "Mid-week from heavy lifting. Core C hits lower abs; 8–10k steps plus easy walking keeps you in the lean-recomp lane without beating up joints. Pair with ~1750–1800 kcal + 7–8 hr sleep.",
     walkTarget: "8,000–10,000 steps",
     sections: [
       {
@@ -287,7 +301,8 @@ export const wednesdayActiveRecovery: WorkoutDay = w({
 export const saturdayRest: WorkoutDay = w({
   key: "saturdayRest",
   title: "Full Rest or Light Walk",
-  subtitle: "Optional 20–30 min walk · Foam roll only · Sleep 7–8 hrs",
+  subtitle:
+    "Optional 20–30 min easy walk · Foam roll · 7–8 hr sleep (hormones + cravings)",
   isRestDay: true,
   sessionKind: "fullRest",
   warmUp: ["Optional 20–30 min easy walk"],
@@ -298,7 +313,7 @@ export const saturdayRest: WorkoutDay = w({
 export const sundayRest: WorkoutDay = w({
   key: "sundayRest",
   title: "Full Rest",
-  subtitle: "Complete recovery · Meal prep · 8 hr sleep target",
+  subtitle: "Recovery · Meal prep · 7–8 hr sleep (non-negotiable for fat loss)",
   isRestDay: true,
   sessionKind: "fullRest",
   warmUp: ["Light stroll if you want fresh air"],
@@ -318,8 +333,8 @@ export const WORKOUT_BY_WEEKDAY: Record<number, WorkoutDay> = {
 
 // ─── MEALS ────────────────────────────────────────────────────────────────────
 // All 7 days are non-veg. Indian meals throughout.
-// Structure: Morning whey shake → big lunch → evening snack/shake → post-workout dinner
-// Protein target: 125–130g/day | Calories: ~1700–1800 kcal
+// Structure: Morning whey shake → big lunch → snack/pre-gym → dinner
+// Lean-phase targets (78 kg, recomp): ~1750–1850 kcal | P 120–130g | C 160–175g | F 45–55g
 
 const sumMeals = (meals: DayMealPlan["meals"]) => {
   let totalProtein = 0;
@@ -345,47 +360,50 @@ function mealPlan(
 // ─── MONDAY (Gym — Upper Push) ────────────────────────────────────────────────
 const mondayMeals: DayMealPlan = mealPlan({
   key: "monday",
-  label: "Monday — Upper Push Fuel",
+  label: "Monday — Upper Push Fuel (~1800 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "08:00",
       name: "Whey + Oats Shake",
-      description: "1 scoop whey in 200ml milk, 40g oats blended in, 1 banana. Thick and filling.",
-      protein: 38,
-      carbs: 58,
+      description:
+        "1 scoop whey in 200ml milk, 35g oats, 1 small banana — lean-phase portions.",
+      protein: 34,
+      carbs: 46,
       fat: 8,
-      calories: 460,
+      calories: 385,
       emoji: "🥤",
     },
     {
       time: "13:00",
       name: "Chicken Breast + Rice + Dal",
-      description: "150g grilled/boiled chicken breast, 1.5 cup basmati rice, 1 cup toor dal, kachumber salad.",
-      protein: 48,
-      carbs: 72,
-      fat: 8,
-      calories: 560,
+      description:
+        "140g chicken breast, ~1.25 cup basmati rice, 1 cup toor dal, kachumber — carbs dialled for 160–175g band.",
+      protein: 44,
+      carbs: 56,
+      fat: 10,
+      calories: 530,
       emoji: "🍗",
     },
     {
       time: "18:00",
       name: "Pre-Workout Whey + Dates",
-      description: "1 scoop whey in water, 5 medjool dates for fast carbs. 30 min before gym.",
-      protein: 25,
-      carbs: 32,
+      description: "1 scoop whey in water, 4 medjool dates. 30 min before gym.",
+      protein: 24,
+      carbs: 30,
       fat: 2,
-      calories: 244,
+      calories: 230,
       emoji: "💪",
     },
     {
       time: "21:00",
       name: "Egg Bhurji + Roti",
-      description: "4 eggs (2 whole + 2 whites) bhurji with onion, tomato, green chilli, 2 whole wheat roti, sabzi.",
-      protein: 28,
-      carbs: 36,
-      fat: 12,
-      calories: 360,
+      description:
+        "3 whole + 1 white egg bhurji, 2 roti, sabzi cooked with ~1 tsp ghee — fats in the 45–55g target band.",
+      protein: 25,
+      carbs: 40,
+      fat: 30,
+      calories: 655,
       emoji: "🍳",
     },
   ],
@@ -394,47 +412,49 @@ const mondayMeals: DayMealPlan = mealPlan({
 // ─── TUESDAY (Gym — Lower Quad) ───────────────────────────────────────────────
 const tuesdayMeals: DayMealPlan = mealPlan({
   key: "tuesday",
-  label: "Tuesday — Lower Quad Fuel",
+  label: "Tuesday — Lower Quad Fuel (~1800 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "08:00",
       name: "Whey + Oats + Banana",
-      description: "1 scoop whey, 40g rolled oats, 1 banana, 200ml milk — blended or stirred.",
-      protein: 38,
-      carbs: 58,
+      description: "1 scoop whey, 35g oats, 1 small banana, 200ml milk.",
+      protein: 34,
+      carbs: 45,
       fat: 8,
-      calories: 460,
+      calories: 380,
       emoji: "🥤",
     },
     {
       time: "13:00",
       name: "Mutton Keema + Rice",
-      description: "150g lean mutton keema, 1.5 cup rice, onion-tomato masala, raita 100g, salad.",
-      protein: 46,
-      carbs: 70,
+      description:
+        "135g lean keema, ~1.25 cup rice, masala, raita 100g — protein without overshooting 130g.",
+      protein: 42,
+      carbs: 54,
       fat: 14,
-      calories: 590,
+      calories: 555,
       emoji: "🍖",
     },
     {
       time: "18:00",
       name: "Pre-Workout Whey + Apple",
-      description: "1 scoop whey in water, 1 apple. 30 min before squats.",
-      protein: 25,
-      carbs: 25,
+      description: "1 scoop whey in water, 1 medium apple. 30 min before squats.",
+      protein: 24,
+      carbs: 30,
       fat: 2,
-      calories: 218,
+      calories: 230,
       emoji: "💪",
     },
     {
       time: "21:00",
       name: "Chicken Curry + 2 Roti",
-      description: "150g chicken curry (home-style, light oil), 2 whole wheat roti, cucumber salad.",
-      protein: 38,
-      carbs: 38,
-      fat: 12,
-      calories: 420,
+      description:
+        "140g chicken curry, 2 roti, sabzi with ~1 tsp ghee — pulls fats into the 45–55g band.",
+      protein: 27,
+      carbs: 36,
+      fat: 30,
+      calories: 655,
       emoji: "🍛",
     },
   ],
@@ -443,47 +463,49 @@ const tuesdayMeals: DayMealPlan = mealPlan({
 // ─── WEDNESDAY (Recovery + Core C) ───────────────────────────────────────────
 const wednesdayMeals: DayMealPlan = mealPlan({
   key: "wednesday",
-  label: "Wednesday — Recovery Day",
+  label: "Wednesday — Recovery Day (~1760 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "08:00",
       name: "Whey + Oats (lighter)",
-      description: "1 scoop whey in 200ml milk, 30g oats, 1 small banana. Rest day so slightly smaller.",
-      protein: 35,
+      description: "1 scoop whey, 200ml milk, 32g oats, 1 small banana — walk day, not a gym surplus.",
+      protein: 34,
       carbs: 48,
-      fat: 7,
-      calories: 395,
+      fat: 8,
+      calories: 450,
       emoji: "🥤",
     },
     {
       time: "13:00",
       name: "Grilled Fish + Brown Rice + Dal",
-      description: "150g rohu/surmai grilled with minimal oil, 1 cup brown rice, 1 cup masoor dal, salad.",
-      protein: 46,
-      carbs: 58,
-      fat: 8,
-      calories: 490,
+      description:
+        "150g grilled fish, 1 cup brown rice, 1 cup masoor dal, salad — steady carbs for steps + core.",
+      protein: 42,
+      carbs: 64,
+      fat: 10,
+      calories: 560,
       emoji: "🐟",
     },
     {
       time: "17:00",
       name: "Whey in Water + Almonds",
-      description: "1 scoop whey in plain water, 10 almonds. Rest day snack — no pre-workout needed.",
-      protein: 26,
+      description: "1 scoop whey, 8 almonds.",
+      protein: 25,
       carbs: 6,
       fat: 8,
-      calories: 196,
+      calories: 210,
       emoji: "🥤",
     },
     {
       time: "20:30",
       name: "Egg Omelette + Roti + Sabzi",
-      description: "3 whole egg omelette with onion, tomato, 2 whole wheat roti, any seasonal sabzi.",
+      description:
+        "3 whole eggs, 2 roti, sabzi with ~1 tsp oil — keeps fats in band without gym-day extras.",
       protein: 24,
-      carbs: 34,
-      fat: 14,
-      calories: 350,
+      carbs: 40,
+      fat: 22,
+      calories: 565,
       emoji: "🍳",
     },
   ],
@@ -492,47 +514,49 @@ const wednesdayMeals: DayMealPlan = mealPlan({
 // ─── THURSDAY (Gym — Upper Pull) ──────────────────────────────────────────────
 const thursdayMeals: DayMealPlan = mealPlan({
   key: "thursday",
-  label: "Thursday — Upper Pull Fuel",
+  label: "Thursday — Upper Pull Fuel (~1800 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "08:00",
       name: "Whey + Oats + Banana",
-      description: "1 scoop whey, 40g oats, 1 banana, 200ml milk. Same reliable morning shake.",
-      protein: 38,
-      carbs: 58,
+      description: "1 scoop whey, 35g oats, 1 small banana, 200ml milk.",
+      protein: 34,
+      carbs: 46,
       fat: 8,
-      calories: 460,
+      calories: 385,
       emoji: "🥤",
     },
     {
       time: "13:00",
       name: "Chicken Breast + Roti + Dal",
-      description: "150g grilled chicken, 2 whole wheat roti, 1 cup chana dal, onion salad, dahi 100g.",
-      protein: 50,
-      carbs: 62,
+      description:
+        "140g grilled chicken, 2 roti, 1 cup chana dal, salad, dahi 100g — mirrors Monday carb control.",
+      protein: 44,
+      carbs: 56,
       fat: 10,
-      calories: 540,
+      calories: 530,
       emoji: "🍗",
     },
     {
       time: "18:00",
       name: "Pre-Workout Whey + Dates",
-      description: "1 scoop whey in water, 5 dates. Deadlift day needs good fuel.",
-      protein: 25,
-      carbs: 32,
+      description: "1 scoop whey, 4 dates before deadlifts + rows.",
+      protein: 24,
+      carbs: 30,
       fat: 2,
-      calories: 244,
+      calories: 230,
       emoji: "💪",
     },
     {
       time: "21:00",
       name: "Egg Bhurji + Rice",
-      description: "4 eggs (2 whole + 2 whites) bhurji, 1 cup rice, simple sabzi or dal.",
-      protein: 28,
-      carbs: 42,
-      fat: 12,
-      calories: 380,
+      description:
+        "3 whole + 1 white bhurji, ~1 cup rice, sabzi with ~1 tsp ghee — post-hinge recovery meal.",
+      protein: 25,
+      carbs: 40,
+      fat: 30,
+      calories: 655,
       emoji: "🍳",
     },
   ],
@@ -541,47 +565,49 @@ const thursdayMeals: DayMealPlan = mealPlan({
 // ─── FRIDAY (Gym — Lower Hamstring) ──────────────────────────────────────────
 const fridayMeals: DayMealPlan = mealPlan({
   key: "friday",
-  label: "Friday — Lower Hamstring Fuel",
+  label: "Friday — Lower Hamstring Fuel (~1800 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "08:00",
       name: "Whey + Oats + Banana",
-      description: "1 scoop whey, 40g oats, 1 banana, 200ml milk. Biggest gym day of the week.",
-      protein: 38,
-      carbs: 58,
+      description: "1 scoop whey, 35g oats, 1 small banana, 200ml milk.",
+      protein: 34,
+      carbs: 45,
       fat: 8,
-      calories: 460,
+      calories: 380,
       emoji: "🥤",
     },
     {
       time: "13:00",
       name: "Mutton/Chicken + Rice + Dal",
-      description: "150g mutton curry or chicken, 1.5 cup rice, 1 cup dal, raita, salad. Friday — eat well.",
-      protein: 48,
-      carbs: 72,
+      description:
+        "135g mutton or chicken, ~1.25 cup rice, 1 cup dal, raita — hinge day without a huge surplus.",
+      protein: 42,
+      carbs: 54,
       fat: 14,
-      calories: 590,
+      calories: 555,
       emoji: "🍖",
     },
     {
       time: "18:00",
       name: "Pre-Workout Whey + Banana",
-      description: "1 scoop whey in water, 1 banana. RDL + Hip Thrust needs good carb fuel.",
-      protein: 25,
-      carbs: 27,
+      description: "1 scoop whey, 1 medium banana before RDL + hip thrust.",
+      protein: 24,
+      carbs: 30,
       fat: 2,
-      calories: 228,
+      calories: 230,
       emoji: "💪",
     },
     {
       time: "21:00",
       name: "Chicken Tikka + Roti",
-      description: "150g home-style chicken tikka (oven or tawa), 2 whole wheat roti, green chutney, salad.",
-      protein: 40,
-      carbs: 34,
-      fat: 10,
-      calories: 380,
+      description:
+        "140g tikka, 2 roti, chutney, salad + ~1 tsp ghee in sabzi — same fat strategy as Tuesday curry night.",
+      protein: 27,
+      carbs: 36,
+      fat: 30,
+      calories: 655,
       emoji: "🍗",
     },
   ],
@@ -590,47 +616,49 @@ const fridayMeals: DayMealPlan = mealPlan({
 // ─── SATURDAY (Rest) ──────────────────────────────────────────────────────────
 const saturdayMeals: DayMealPlan = mealPlan({
   key: "saturday",
-  label: "Saturday — Rest Day",
+  label: "Saturday — Rest Day (~1785 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "09:00",
       name: "Whey + Oats (relaxed)",
-      description: "1 scoop whey, 40g oats, 1 banana, 200ml milk. Weekend — eat at your own pace.",
-      protein: 38,
-      carbs: 58,
+      description: "1 scoop whey, 35g oats, 1 small banana, 200ml milk.",
+      protein: 34,
+      carbs: 48,
       fat: 8,
-      calories: 460,
+      calories: 445,
       emoji: "🥤",
     },
     {
       time: "13:30",
       name: "Fish Curry + Rice",
-      description: "150g rohu/pomfret light curry, 1.5 cup basmati rice, dal, kachumber salad.",
-      protein: 44,
-      carbs: 68,
-      fat: 10,
-      calories: 540,
+      description:
+        "150g fish curry, ~1.25 cup rice, dal, salad — weekend rest, still inside macro rails.",
+      protein: 40,
+      carbs: 64,
+      fat: 11,
+      calories: 555,
       emoji: "🐟",
     },
     {
       time: "17:00",
       name: "Whey in Water + Walnuts",
-      description: "1 scoop whey in water, 8 walnuts. Light rest day snack.",
-      protein: 26,
-      carbs: 4,
-      fat: 10,
-      calories: 206,
+      description: "1 scoop whey, 6 walnuts.",
+      protein: 25,
+      carbs: 5,
+      fat: 8,
+      calories: 205,
       emoji: "🥤",
     },
     {
       time: "20:30",
       name: "Egg Curry + 2 Roti",
-      description: "2 whole eggs in light onion-tomato curry, 2 whole wheat roti, sabzi.",
-      protein: 22,
-      carbs: 36,
-      fat: 14,
-      calories: 350,
+      description:
+        "2 whole eggs in light curry, 2 roti, sabzi — extra roti vs weekday dinner for satiety on rest day.",
+      protein: 24,
+      carbs: 48,
+      fat: 20,
+      calories: 580,
       emoji: "🍳",
     },
   ],
@@ -639,47 +667,48 @@ const saturdayMeals: DayMealPlan = mealPlan({
 // ─── SUNDAY (Rest) ────────────────────────────────────────────────────────────
 const sundayMeals: DayMealPlan = mealPlan({
   key: "sunday",
-  label: "Sunday — Full Rest",
+  label: "Sunday — Full Rest (~1785 kcal)",
   isVegetarian: false,
   meals: [
     {
       time: "09:30",
       name: "Whey + Oats + Banana",
-      description: "1 scoop whey, 40g oats, 1 banana, 200ml milk. Even on Sunday — hit your protein.",
-      protein: 38,
-      carbs: 58,
+      description: "1 scoop whey, 35g oats, 1 small banana, 200ml milk.",
+      protein: 34,
+      carbs: 48,
       fat: 8,
-      calories: 460,
+      calories: 445,
       emoji: "🥤",
     },
     {
       time: "13:30",
       name: "Chicken Rice Bowl",
-      description: "150g chicken (any style — curry, grilled, bhuna), 1.5 cup rice, dal, raita, salad.",
-      protein: 46,
-      carbs: 68,
+      description:
+        "140g chicken, ~1.25 cup rice, dal, raita, salad — meal prep friendly, same targets as Saturday.",
+      protein: 40,
+      carbs: 64,
       fat: 10,
-      calories: 542,
+      calories: 555,
       emoji: "🍗",
     },
     {
       time: "16:30",
       name: "Whey in Water + Almonds",
-      description: "1 scoop whey in water, 10 almonds. Keep protein topped up on rest days too.",
-      protein: 26,
-      carbs: 5,
+      description: "1 scoop whey, 8 almonds.",
+      protein: 25,
+      carbs: 6,
       fat: 8,
-      calories: 196,
+      calories: 210,
       emoji: "🥤",
     },
     {
       time: "20:00",
       name: "Omelette + Roti + Dal",
-      description: "3 whole egg masala omelette, 2 whole wheat roti, 1 cup dal. Light Sunday dinner.",
-      protein: 28,
-      carbs: 38,
-      fat: 14,
-      calories: 378,
+      description: "3 whole egg omelette, 2 roti, 1 cup dal, ~1 tsp oil in cooking.",
+      protein: 24,
+      carbs: 48,
+      fat: 22,
+      calories: 565,
       emoji: "🍳",
     },
   ],
